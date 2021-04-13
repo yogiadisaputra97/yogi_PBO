@@ -1,0 +1,88 @@
+1. menghitung Luas balok:
+
+
+import java.util.Scanner;
+ 
+public class luas_balok {
+    public static void main(String[] args) throws Exception {
+        Scanner input = new Scanner(System.in);
+        int panjang, lebar, tinggi, hasil;
+        System.out.println("Program Menghitung Luas Balok");
+        System.out.println("=============================");
+ 
+        // logic
+        System.out.print("Masukan Panjang Balok: ");
+        panjang = input.nextInt();
+        System.out.print("Masukan Lebar balok: ");
+        lebar = input.nextInt();
+        System.out.print("Masukan Tinggi Balok: ");
+        tinggi = input.nextInt();
+ 
+        // hitung luas balok;
+        hasil =  2 * ((panjang * lebar) + (panjang * tinggi) + (lebar * tinggi));
+ 
+        System.out.println("Luas Balok tersebut adalah: " + hasil);
+ 
+ 
+    }
+}
+
+
+2. menghitung keliling balok:
+
+
+import java.util.Scanner;
+ 
+public class keliling_balok {
+    public static void main(String[] args) throws Exception {
+        Scanner input = new Scanner(System.in);
+        int panjang, lebar, tinggi, hasil;
+        System.out.println("Program Menghitung Keliling Balok");
+        System.out.println("=============================");
+ 
+        // logic
+        System.out.print("Masukan Panjang Balok: ");
+        panjang = input.nextInt();
+        System.out.print("Masukan Lebar balok: ");
+        lebar = input.nextInt();
+        System.out.print("Masukan Tinggi Balok: ");
+        tinggi = input.nextInt();
+ 
+        // hitung keliling balok;
+        hasil = 4 * (panjang + lebar + tinggi);
+ 
+        System.out.println("Keliling Balok tersebut adalah: " + hasil);
+ 
+ 
+    }
+}
+
+
+3. menghitung volume balok :
+
+
+import java.util.Scanner;
+ 
+public class volume_balok {
+    public static void main(String[] args) throws Exception {
+        Scanner input = new Scanner(System.in);
+        int panjang, lebar, tinggi, hasil;
+        System.out.println("Program Menghitung Volume Balok");
+        System.out.println("=============================");
+ 
+        // logic
+        System.out.print("Masukan Panjang Balok: ");
+        panjang = input.nextInt();
+        System.out.print("Masukan Lebar balok: ");
+        lebar = input.nextInt();
+        System.out.print("Masukan Tinggi Balok: ");
+        tinggi = input.nextInt();
+ 
+        // hitung volume balok;
+        hasil = panjang * lebar * tinggi;
+ 
+        System.out.println("Volume Balok tersebut adalah: " + hasil);
+ 
+ 
+    }
+}
