@@ -1,0 +1,109 @@
+public class jDSecurity extends javax.swing.JDialog {
+    UserInterf user;
+    List<User>list=new ArrayList<User>();
+    User masteruser = new User();
+    public MenuUtama menu;    
+    private static boolean dobutton;
+    private Statement stat;
+    private ResultSet rs;
+    private static boolean daftar = true;
+    public String nama_aset;
+    public String harga_aset;
+    public String nilai_aset;
+    public jDSecurity(java.awt.Frame parent, boolean modal) throws SQLException, IOException {
+        super(parent, modal);
+        initComponents();
+        initForm();
+        user = new UserImpl();        
+        list = user.getAll();
+        if(list == null){
+            JOptionPane.showMessageDialog(rootPane, "KONEKSI GAGAL");
+        }        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = this.getSize();
+        if (frameSize.height > screenSize.height) {
+            frameSize.height = screenSize.height;
+        }
+        if (frameSize.width > screenSize.width) {
+            frameSize.width = screenSize.width;
+        }
+        this.setLocation((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.height) / 2);
+    }
+private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        try {
+            dobutton = true;
+            dobutton();
+        } catch (Exception ex) {
+            Logger.getLogger(jDSecurity.class.getName()).log(Level.SEVERE, null, ex);
+        }}                                         
+
+private void jButtonNoActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    dobutton = false;
+    System.exit(0);
+}                                         
+private void jTextUserKeyPressed(java.awt.event.KeyEvent evt) {                                     
+    int nenter = evt.VK_ENTER;
+    int kpres = evt.getKeyCode();
+    if (kpres == nenter) {
+        jPasswordField1.requestFocus();
+    }}                                    
+
+private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {                                           
+    int nenter = evt.VK_ENTER;
+    int kpres = evt.getKeyCode();
+    if (kpres == nenter) {
+        jButtonOk.requestFocus();
+    }
+    if (kpres == evt.VK_UP) {
+        jTextUser.requestFocus();
+    }}                                          
+private void jButtonOkKeyPressed(java.awt.event.KeyEvent evt) {                                     
+    int nenter = evt.VK_ENTER;
+    int kpres = evt.getKeyCode();
+    if (kpres == nenter) {
+        dobutton = true;
+    }}                                    
+
+private void jButtonNoKeyPressed(java.awt.event.KeyEvent evt) {                                     
+    int nenter = evt.VK_ENTER;
+    int kpres = evt.getKeyCode();
+}                                    
+    public void HakAkses(String Iduser,String Pass,String Nama,String Level,String nama_aset,String harga_aset,String nilai_aset) throws IOException, SQLException {
+        menu = new MenuUtama(Iduser,Pass,Nama,nama_aset,harga_aset,nilai_aset);
+    }
+    void dobutton() throws SQLException, IOException {
+        if (dobutton == true) {
+            list = user.getMasuk(this.jTextUser.getText().trim(), this.jPasswordField1.getText().trim());
+            if(list.isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "USER ID ATAU PASSWORD SALAH");
+            }else{
+                masteruser.setIduser(list.get(0).getIduser());
+                masteruser.setPassword(list.get(0).getPassword());
+                masteruser.setNama(list.get(0).getNama());
+                masteruser.setLevel(list.get(0).getLevel());
+                masteruser.setnama_aset(list.get(0).getnama_aset());
+                masteruser.setharga_aset(list.get(0).getharga_aset());
+                masteruser.setnilai_aset(list.get(0).getnilai_aset());                
+                HakAkses(masteruser.getIduser(),masteruser.getPassword(),masteruser.getNama(),                        masteruser.getLevel(),masteruser.getIzin1(),masteruser.getIzin2(),masteruser.getIzin3());                
+                dispose();
+               menu.setVisible(true);
+            }            
+        } else {
+            System.exit(0);
+        }}
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    jDSecurity dialog = new jDSecurity(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }});
+                    dialog.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(jDSecurity.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(jDSecurity.class.getName()).log(Level.SEVERE, null, ex);
+                }}});}
